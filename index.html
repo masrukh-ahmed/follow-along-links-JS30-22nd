@@ -47,7 +47,32 @@
     </div>
 
     <script>
-      // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+      //get the links
+      const links = [...document.querySelectorAll("a")];
+      let highlight = document.createElement("span");
+      document.querySelector("body").appendChild(highlight);
+      highlight.classList.add("highlight");
+
+      function highlightLink(e) {
+        const coordinates = e.currentTarget.getBoundingClientRect();
+        highlight.style.display = "block";
+        highlight.style.top = `${coordinates.top + window.scrollY}px`;
+        highlight.style.width = `${coordinates.width}px`;
+        highlight.style.height = `${coordinates.height}px`;
+        highlight.style.left = `${coordinates.left + window.scrollX}px`;
+        console.log(
+          `${coordinates.top}px, ${coordinates.width}px, ${coordinates.height}px`
+        );
+      }
+
+      // function removeHighlight(e) {
+      //   highlight.style.display = "none";
+      // }
+
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", highlightLink);
+        // link.addEventListener("mouseleave", removeHighlight);
+      });
     </script>
   </body>
 </html>
